@@ -1,4 +1,4 @@
-name: Deploy HTML to S3
+name: Sync with S3 bucket
 on:
   push
 env:
@@ -18,6 +18,5 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::247451208458:role/github-actions-role
           aws-region: ${{ env.AWS_REGION }}
-      - name: Copy index.html to s3
-        run: |
-          aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+      - name: Synchronize GitHub repos with Amazon S3 Bucket
+        run: aws s3 sync . s3://${{ env.BUCKET_NAME }} --delete --exclude ".git/*" --exclude ".github/*"
