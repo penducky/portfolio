@@ -1,0 +1,23 @@
+name: Deploy HTML to S3
+on:
+  push
+env:
+  BUCKET_NAME : "portfolio-penducky"
+  AWS_REGION : "us-east-1"
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  S3PackageUpload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v5
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::247451208458:role/github-actions-role
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Copy index.html to s3
+        run: |
+          aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
