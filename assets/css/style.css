@@ -24,7 +24,8 @@
             padding: 2rem;
             display: flex;
             justify-content: center;
-            align-items: center; /* Center content vertically, prevents stretch */
+            align-items: center;
+            /* Center content vertically, prevents stretch */
         }
 
         /* --- Custom Premium Scrollbar --- */
@@ -81,7 +82,8 @@
         .bento-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            align-content: start; /* Pack rows tightly, no stretching */
+            align-content: start;
+            /* Pack rows tightly, no stretching */
             gap: 1.25rem;
             max-width: 1100px;
             width: 100%;
@@ -332,12 +334,16 @@
             transition: transform 0.5s var(--ease-smooth),
                 box-shadow 0.5s var(--ease-smooth),
                 border-color 0.3s ease;
+            overflow: visible;
+            /* Allow tooltip to show */
         }
 
         .project-card:hover {
             transform: translateY(-6px) scale(1.005);
             border-color: var(--accent);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            z-index: 5;
+            /* Ensure tooltip stays on top of other elements */
         }
 
         .project-thumb {
@@ -347,6 +353,8 @@
             background-size: cover;
             background-position: center;
             border-bottom: 1px solid var(--border);
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
         }
 
         .project-content {
@@ -496,6 +504,7 @@
         .modal-content::-webkit-scrollbar {
             width: 6px;
         }
+
         .modal-content::-webkit-scrollbar-thumb {
             background-color: #333;
             border-radius: 20px;
@@ -567,7 +576,57 @@
             transition: opacity 0.3s;
         }
 
+
         .modal-action-btn:hover {
             opacity: 0.9;
         }
 
+        /* --- Tech Tooltip & Animation --- */
+        .tech-item {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tech-item .tech-icon {
+            transition: transform 0.3s var(--ease-smooth), opacity 0.3s;
+        }
+
+        .tech-item:hover .tech-icon {
+            transform: translateY(-3px) scale(1.2);
+            opacity: 1;
+        }
+
+        /* Tooltip */
+        .tech-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-5px) scale(0.9);
+            padding: 0.4rem 0.8rem;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-top: 8px;
+        }
+
+        .tech-item:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }

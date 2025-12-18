@@ -191,7 +191,16 @@ function renderProjects(projects) {
 
     projects.forEach((p, index) => {
         const techIcons = p.tech.map(t => {
-            return `<img src="${t}" class="tech-icon" alt="Tech" />`;
+            // Extract name from path: assets/img/icons/aws.svg -> aws
+            const fileName = t.split('/').pop().split('.')[0];
+            // Simple Capitalization
+            const toolTipText = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+
+            return `
+                <div class="tech-item" data-tooltip="${toolTipText}">
+                    <img src="${t}" class="tech-icon" alt="${toolTipText}" />
+                </div>
+            `;
         }).join('');
 
         // Changed anchor to div with onclick
