@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Creative Developer</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="bento-container">
+        <div class="card hero-card">
+            <div class="profile-info">
+                <h1>Deven Christopher</h1>
+                <p>Full-Stack Developer & Designer</p>
+            </div>
+            <a href="https://www.google.com/maps/search/Jakarta,+Indonesia" target="_blank" class="location-badge">
+                <i class="ri-map-pin-line"></i> Jakarta, Indonesia
+            </a>
+        </div>
+
+        <div class="card toggle-card compact-row">
+            <div class="toggle-wrapper">
+                <div class="toggle-bg" id="toggleBg"></div>
+                <button class="role-btn active" data-role="cloud" onclick="setRole('cloud')">Cloud</button>
+                <button class="role-btn" data-role="video" onclick="setRole('video')">Video</button>
+                <button class="role-btn" data-role="arch" onclick="setRole('arch')">Architecture</button>
+            </div>
+        </div>
+
+        <div class="card contact-card compact-row">
+            <a href="mailto:email@example.com" class="contact-link">
+                <i class="ri-mail-send-line"></i> <span>devenchrw@gmail</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="contact-link">
+                <i class="ri-linkedin-fill"></i> <span>devenchr</span>
+            </a>
+            <a href="https://github.com" target="_blank" class="contact-link">
+                <i class="ri-github-fill"></i> <span>VenCe</span>
+            </a>
+        </div>
+
+        <div class="card description-card">
+            <div class="animate-wrapper" id="descContent">
+                <span class="role-tag" id="roleTag">Cloud Engineering</span>
+                <p id="roleDescription" style="font-size: 1rem; line-height: 1.6; color: #ccc;">
+                    Placeholder text...
+                </p>
+            </div>
+        </div>
+
+        <div class="card aux-card">
+            <div class="animate-wrapper" id="auxContent">
+                <div class="aux-header" id="auxHeader">
+                    <i class="ri-award-line"></i> Certifications
+                </div>
+                <div id="auxList">
+                </div>
+            </div>
+        </div>
+
+        <div class="project-grid-area" id="projectsContainer">
+        </div>
+
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="ri-close-line"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
