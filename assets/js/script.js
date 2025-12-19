@@ -6,32 +6,47 @@ const data = {
         auxTitle: 'Certifications',
         auxIcon: 'ri-shield-check-line',
         items: [
-            { name: "AWS Solutions Architect", detail: "Associate", date: "Sep 2025", icon: "assets/img/icons/aws.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=AWS+Certificate" },
-            { name: "CS50 Python", detail: "Harvard University", date: "June 2025", icon: "assets/img/icons/python.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=CS50+Certificate" }
+            { name: "AWS Solutions Architect", detail: "Associate", date: "On progress", icon: "assets/img/icons/aws-saa-c03.png", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=AWS+Certificate" },
+            { name: "CS50 Python", detail: "Harvard University", date: "On progress", icon: "assets/img/icons/python.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=CS50+Certificate" }
         ],
         projects: [
             {
-                title: 'Serverless API Gateway',
-                date: 'Sep 2025',
-                desc: 'Scalable REST API built with Lambda, API Gateway, and DynamoDB.',
+                title: 'Serverless Portfolio',
+                date: 'Dec 2025',
+                desc: 'Static web hosted in Amazon Web Services.',
+                description: 'Automation: GitHub Actions',
                 image: 'assets/img/projects/serverless-api.jpg',
-                tech: ['assets/img/icons/aws.svg', 'assets/img/icons/python.svg', 'assets/img/icons/terraform.svg'],
+                tech: [
+                    { name: 'AWS S3', icon: 'assets/img/icons/aws-s3.svg' },
+                    { name: 'CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' },
+                    { name: 'Gemini', icon: 'assets/img/icons/gemini.svg' },
+                    { name: 'GitHub', icon: 'assets/img/icons/github.svg' },
+                    { name: 'HTML5', icon: 'assets/img/icons/html.svg' }
+                ],
                 link: '#'
             },
             {
                 title: 'K8s Cluster Config',
                 date: 'Aug 2025',
                 desc: 'Automated Kubernetes cluster setup with monitoring and logging.',
+                description: 'A complete configuration for a high-availability Kubernetes cluster, including Prometheus for monitoring and Grafana for visualization. Automates node provisioning and network policy management.',
                 image: 'assets/img/projects/k8s-cluster.jpg',
-                tech: ['assets/img/icons/kubernetes.svg', 'assets/img/icons/linux.svg'],
+                tech: [
+                    { name: 'Kubernetes', icon: 'assets/img/icons/kubernetes.svg' },
+                    { name: 'Linux', icon: 'assets/img/icons/linux.svg' }
+                ],
                 link: '#'
             },
             {
                 title: 'Security Auditor',
                 date: 'July 2025',
                 desc: 'Python script to audit IAM roles and S3 bucket policies.',
+                description: 'An automated security tool written in Python that scans AWS environments for overly permissive IAM roles and public S3 buckets. Generates detailed compliance reports.',
                 image: 'assets/img/projects/security-auditor.jpg',
-                tech: ['assets/img/icons/python.svg', 'assets/img/icons/security.svg'],
+                tech: [
+                    { name: 'Python', icon: 'assets/img/icons/python.svg' },
+                    { name: 'Security', icon: 'assets/img/icons/security.svg' }
+                ],
                 link: '#'
             }
         ]
@@ -49,27 +64,37 @@ const data = {
         ],
         projects: [
             {
-                title: 'Tech Review Series',
-                date: 'Oct 2025',
-                desc: 'Fast-paced edits with motion tracking text and dynamic transitions.',
+                title: 'Homestay Documentary',
+                date: 'Dec 2025',
+                desc: 'Documentary-style film with focus on homestay experience.',
+                description: 'An immersive documentary exploring the cultural nuances of homestay living. Features intimate interviews, ambient soundscapes, and a color grade that reflects the warmth of hospitality.',
                 image: 'assets/img/projects/tech-review.jpg',
-                tech: ['assets/img/icons/premiere.svg', 'assets/img/icons/aftereffects.svg'],
+                tech: [
+                    { name: 'DaVinci Resolve', icon: 'assets/img/icons/davinci-resolve.svg' }
+                ],
                 link: '#'
             },
             {
-                title: 'Corporate Doc',
-                date: 'June 2025',
-                desc: '15-minute documentary with focus on interview narrative flow.',
+                title: 'Short Movie "Be Found"',
+                date: 'Aug 2024',
+                desc: '27-minute short movie with full production team.',
+                description: 'A 27-minute narrative short film produced with a full crew. I managed the post-production workflow, including editing, color grading, and final delivery for festival screening.',
                 image: 'assets/img/projects/corporate-doc.jpg',
-                tech: ['assets/img/icons/camera.svg', 'assets/img/icons/mic.svg'],
-                link: '#'
+                tech: [
+                    { name: 'DaVinci Resolve', icon: 'assets/img/icons/davinci-resolve.svg' }
+                ],
+                link: 'https://www.youtube.com/watch?v=seYLOdzR3Xw'
             },
             {
-                title: 'Short Film "Echoes"',
-                date: 'Feb 2025',
-                desc: 'Award-winning short. Handled full post-production pipeline.',
+                title: 'VFx Project',
+                date: 'Jun 2019',
+                desc: 'A VFX-driven short film designed as an extension of a live theatrical performance',
+                description: 'This experimental short film integrates visual effects with live-action footage to extend the narrative of a theatrical performance. Features extensive use of compositing and particle effects.',
                 image: 'assets/img/projects/short-film.jpg',
-                tech: ['assets/img/icons/film.svg', 'assets/img/icons/davinci.svg'],
+                tech: [
+                    { name: 'Premiere Pro', icon: 'assets/img/icons/adobe-premiere-pro.svg' },
+                    { name: 'After Effects', icon: 'assets/img/icons/adobe-after-effects.svg' }
+                ],
                 link: '#'
             }
         ]
@@ -82,31 +107,43 @@ const data = {
         auxIcon: 'ri-graduation-cap-line',
         items: [
             { name: "Bachelor of Architecture", detail: "Bandung Institute of Technology", date: "Sep 2025", icon: "assets/img/icons/university.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Architecture+Degree" },
-            { name: "BIM Proficiency", detail: "Revit & ArchiCAD", date: "Certified 2024", icon: "assets/img/icons/bim.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=BIM+Certificate" }
+            { name: "Sustainable Project Management", detail: "Revit & ArchiCAD", date: "Certified 2024", icon: "assets/img/icons/bim.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=BIM+Certificate" }
         ],
         projects: [
             {
                 title: 'Sustainable Housing',
                 date: 'May 2025',
                 desc: 'Residential complex design focusing on passive cooling.',
+                description: 'A sustainable housing project designed to maximize natural ventilation and minimize energy consumption. Utilizes passive cooling techniques and locally sourced materials.',
                 image: 'assets/img/projects/housing.jpg',
-                tech: ['assets/img/icons/revit.svg', 'assets/img/icons/autocad.svg'],
+                tech: [
+                    { name: 'Revit', icon: 'assets/img/icons/revit.svg' },
+                    { name: 'AutoCAD', icon: 'assets/img/icons/autocad.svg' }
+                ],
                 link: '#'
             },
             {
                 title: 'Urban Park Revamp',
                 date: 'Apr 2025',
                 desc: 'Landscape project integrating flood control systems.',
+                description: 'An urban park revitalization project that integrates aesthetic landscape design with functional flood control systems. Creates a green space that serves both the community and the environment.',
                 image: 'assets/img/projects/park.jpg',
-                tech: ['assets/img/icons/sketchup.svg', 'assets/img/icons/lumion.svg'],
+                tech: [
+                    { name: 'SketchUp', icon: 'assets/img/icons/sketchup.svg' },
+                    { name: 'Lumion', icon: 'assets/img/icons/lumion.svg' }
+                ],
                 link: '#'
             },
             {
                 title: 'Minimalist Office',
                 date: 'Jan 2025',
                 desc: 'High-rise concept utilizing steel structure.',
+                description: 'A conceptual design for a minimalist high-rise office building. Features an exposed steel structural system and a flexible open-plan layout to adapt to changing workspace needs.',
                 image: 'assets/img/projects/office.jpg',
-                tech: ['assets/img/icons/rhino.svg', 'assets/img/icons/grasshopper.svg'],
+                tech: [
+                    { name: 'Rhino', icon: 'assets/img/icons/rhino.svg' },
+                    { name: 'Grasshopper', icon: 'assets/img/icons/grasshopper.svg' }
+                ],
                 link: '#'
             }
         ]
@@ -191,14 +228,9 @@ function renderProjects(projects) {
 
     projects.forEach((p, index) => {
         const techIcons = p.tech.map(t => {
-            // Extract name from path: assets/img/icons/aws.svg -> aws
-            const fileName = t.split('/').pop().split('.')[0];
-            // Simple Capitalization
-            const toolTipText = fileName.charAt(0).toUpperCase() + fileName.slice(1);
-
             return `
-                <div class="tech-item" data-tooltip="${toolTipText}">
-                    <img src="${t}" class="tech-icon" alt="${toolTipText}" />
+                <div class="tech-item" data-tooltip="${t.name}">
+                    <img src="${t.icon}" class="tech-icon" alt="${t.name}" />
                 </div>
             `;
         }).join('');
@@ -255,10 +287,7 @@ function openProjectModal(index) {
         <div class="modal-meta">
             <span>${project.date}</span>
         </div>
-        <p class="modal-desc">${project.desc} <br><br> 
-           This project showcases skills in full-stack development and design. 
-           It was built using modern technologies to ensure scalability and performance.
-        </p>
+        <p class="modal-desc">${project.description}</p>
         <a href="${project.link}" target="_blank" class="modal-action-btn">
             View Project <i class="ri-arrow-right-up-line"></i>
         </a>
