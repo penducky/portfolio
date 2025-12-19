@@ -7,7 +7,7 @@ const data = {
         auxIcon: 'ri-shield-check-line',
         items: [
             { name: "AWS Solutions Architect", detail: "Associate", date: "On progress", icon: "assets/img/icons/aws-saa-c03.png", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=AWS+Certificate" },
-            { name: "CS50 Python", detail: "Harvard University", date: "On progress", icon: "assets/img/icons/python.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=CS50+Certificate" }
+            { name: "CS50 Python", detail: "Harvard University", date: "On progress", icon: "assets/img/icons/harvard-university.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=CS50+Certificate" }
         ],
         projects: [
             {
@@ -106,7 +106,7 @@ const data = {
         auxTitle: 'Education',
         auxIcon: 'ri-graduation-cap-line',
         items: [
-            { name: "Bachelor of Architecture", detail: "Bandung Institute of Technology", date: "Sep 2025", icon: "assets/img/icons/university.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Architecture+Degree" },
+            { name: "Bachelor of Architecture", detail: "Bandung Institute of Technology", date: "Sep 2025", icon: "assets/img/icons/itb.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Architecture+Degree" },
             { name: "Sustainable Project Management", detail: "Revit & ArchiCAD", date: "Certified 2024", icon: "assets/img/icons/bim.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=BIM+Certificate" }
         ],
         projects: [
@@ -185,21 +185,16 @@ function setRole(roleKey) {
     auxList.innerHTML = '';
 
     roleData.items.forEach((item, index) => {
-        const dateHtml = item.date
-            ? `<div class="info-right"><div class="info-date">${item.date}</div></div>`
-            : '';
-
-        // Added onclick handler
         auxList.innerHTML += `
-                    <div class="info-item" style="cursor: pointer;" onclick="openCertModal(${index})">
-                        <div class="info-left">
+                    <div class="info-card-grid" onclick="openCertModal(${index})">
+                        <div class="info-icon-strip">
                             <img src="${item.icon}" class="local-icon-sm" alt="icon" />
-                            <div>
-                                <div style="font-weight:600; font-size:0.95rem;">${item.name}</div>
-                                <div style="font-size:0.8rem; color:var(--text-muted)">${item.detail}</div>
-                            </div>
                         </div>
-                        ${dateHtml}
+                        <div class="info-content">
+                            <div class="info-title">${item.name}</div>
+                            <div class="info-detail">${item.detail}</div>
+                            ${item.date ? `<div class="info-date-sm">${item.date}</div>` : ''}
+                        </div>
                     </div>
                 `;
     });
