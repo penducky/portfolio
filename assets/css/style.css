@@ -264,7 +264,7 @@
 
         .inner-scroll {
             height: 100%;
-            overflow-y: auto;
+            overflow-y: scroll;
             padding-right: 1rem;
             /* Push content away from scrollbar */
             /* Firefox: scrollbar-width handled in generic block? needs update */
@@ -332,7 +332,7 @@
         #auxList {
             display: flex;
             flex-wrap: nowrap;
-            overflow-x: auto;
+            overflow-x: scroll;
             gap: 0.75rem;
             padding-bottom: 0.5rem;
             /* Space for scrollbar */
@@ -429,6 +429,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
+            padding-bottom: calc(1rem + 8px);
+            /* Reserve space for carousel dots stability */
         }
 
         .project-card {
@@ -499,6 +501,8 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            height: 4.3rem;
+            /* Force exact 3-line height (0.95 * 1.5 * 3 approx) */
         }
 
         .project-footer {
@@ -509,6 +513,8 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 1rem;
             flex-wrap: wrap;
+            min-height: calc(35px + 1rem);
+            /* Reserve space for icons even if empty */
             /* Allow icons to wrap to next line */
         }
 
@@ -570,6 +576,139 @@
             }
         }
 
+        /* Ensure Projects Container always spans full width */
+        #projectsContainer {
+            grid-column: span 6;
+        }
+
+        /* --- Carousel Styles --- */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            /* Removed grid-column span 6 since parent handles it now, but harmless to keep or remove. Let's keep transparent. */
+        }
+
+        .carousel-track-container {
+            width: calc(100% + 40px);
+            overflow: hidden;
+            padding-top: 20px;
+            /* Increased buffer for hover lift */
+            padding-bottom: 40px;
+            /* Increased buffer for shadow */
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-top: -20px;
+            margin-bottom: -40px;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            gap: 1.25rem;
+            width: 100%;
+            align-items: stretch;
+            /* Force equal height */
+        }
+
+        /* Nav Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+            font-size: 1.2rem;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- Carousel Animation States --- */
+        .project-card {
+            transition: transform 0.5s var(--ease-smooth),
+                box-shadow 0.5s var(--ease-smooth),
+                border-color 0.3s ease,
+                opacity 0.6s ease,
+                filter 0.6s ease;
+        }
+
+        /* State for cards initially out of view or leaving view */
+        .project-card.non-visible {
+            opacity: 0.4;
+            transform: scale(0.95);
+            filter: blur(2px);
+            pointer-events: none;
+            /* Prevent clicking when dimmed */
+        }
+
+        .nav-arrow.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .nav-arrow:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .nav-arrow.left {
+            left: -50px;
+        }
+
+        .nav-arrow.right {
+            right: -50px;
+        }
+
+        /* Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Mobile override for Arrows */
+        @media (max-width: 1200px) {
+            .nav-arrow {
+                display: none;
+                /* Hide arrows on smaller screens, rely on swipe/scroll? Or adjust pos */
+            }
+
+            .carousel-track {
+                overflow-x: auto;
+                /* Native scroll on mobile */
+                scroll-snap-type: x mandatory;
+            }
+        }
+
         /* --- Modal Styles --- */
         .modal-overlay {
             position: fixed;
@@ -598,7 +737,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 0;
             width: 100%;
             max-width: 600px;
             position: relative;
@@ -628,17 +767,29 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.5);
             border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: background 0.2s;
             z-index: 10;
+            backdrop-filter: blur(4px);
         }
 
         .close-btn:hover {
-            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+
+        .modal-body-content {
+            padding: 2rem;
         }
 
         /* Modal Dynamic Content Styles */
@@ -646,9 +797,10 @@
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--border);
+            display: block;
         }
 
         .modal-title {
@@ -665,6 +817,32 @@
             font-size: 0.9rem;
             color: var(--accent);
             font-weight: 500;
+        }
+
+        .modal-desc-rich {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .modal-desc-rich p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-desc-rich ul {
+            padding-left: 1.2rem;
+            margin-bottom: 1rem;
+            list-style-type: disc;
+        }
+
+        .modal-desc-rich li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-desc-rich strong {
+            color: white;
+            font-weight: 600;
         }
 
         .modal-desc {
