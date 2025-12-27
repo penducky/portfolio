@@ -1,9 +1,10 @@
-name: Sync with S3 bucket
+name: Sync with S3 bucket and Invalidate CloudFront
 on:
   push
 env:
   BUCKET_NAME : "portfolio-penducky"
   AWS_REGION : "us-east-1"
+  DIST_ID : "E1L2Q99IRIH5E1"
 permissions:
   id-token: write
   contents: read
@@ -11,12 +12,21 @@ jobs:
   S3PackageUpload:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Get the code
       - name: Git clone the repository
         uses: actions/checkout@v5
+        
+      # Step 2: Login to AWS
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::247451208458:role/github-actions-role
           aws-region: ${{ env.AWS_REGION }}
+          
+      # Step 3: Upload the files
       - name: Synchronize GitHub repos with Amazon S3 Bucket
         run: aws s3 sync . s3://${{ env.BUCKET_NAME }} --delete --exclude ".git/*" --exclude ".github/*"
+
+      # Step 4: Clear Cache
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.DIST_ID }} --paths "/*"
