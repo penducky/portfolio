@@ -1,8 +1,8 @@
 const data = {
     cloud: {
         color: '#3b82f6',
-        tag: 'Cloud Engineering & Security',
-        desc: 'Specializing in AWS infrastructure and security. I build scalable backends and automate deployment pipelines using Python and Terraform.',
+        tag: 'Cloud Engineer',
+        desc: 'Focused on building scalable, secure, and automated infrastructure, specialized in Amazon Web Services (AWS).',
         auxTitle: 'Certifications',
         auxIcon: 'ri-shield-check-line',
         items: [

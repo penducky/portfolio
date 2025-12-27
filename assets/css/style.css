@@ -539,40 +539,120 @@
             }
 
             .bento-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                gap: 1rem;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.5rem;
             }
 
-            /* Override all spans to full width for mobile */
+            /* Override all spans to full width for mobile (Flexbox Method) */
             .hero-card,
             .toggle-card,
             .contact-card,
             .description-card,
             .aux-card,
-            .project-grid-area {
-                grid-column: span 1 !important;
+            .project-grid-area,
+            #projectsContainer {
+                width: 100% !important;
+                flex: 0 0 auto !important;
+                height: auto !important;
             }
 
+            /* Hero Card Mobile - Force Column */
+            .hero-card {
+                display: flex;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 1.5rem;
+                height: auto !important;
+            }
+
+            .location-badge {
+                width: 100%;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+
+            /* Compact Rows (Switch) */
             .compact-row {
                 height: auto;
                 padding: 1rem;
-                flex-direction: column;
+                flex-direction: column !important;
                 gap: 1rem;
             }
 
             .toggle-wrapper {
-                height: 45px;
+                height: 50px;
+                width: 100%;
             }
 
+            /* Contact Card Mobile - Force Column */
             .contact-card {
-                justify-content: space-between;
+                display: flex;
+                flex-direction: column !important;
+                gap: 1rem;
+                height: auto !important;
+                justify-content: center;
+                padding: 1.25rem;
+            }
+
+            .contact-link {
                 width: 100%;
-                padding: 0.5rem;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.03);
+            }
+
+            /* Description & Aux Mobile */
+            .inner-scroll {
+                overflow: visible !important;
+                height: auto !important;
+            }
+
+            #descContent {
+                margin-bottom: 0;
+            }
+
+            /* Description/Aux Mobile */
+            .description-card,
+            .aux-card {
+                height: auto !important;
+                min-height: 200px;
+            }
+
+            /* Force Vertical Stack for Aux List (Critical) */
+            #auxList {
+                display: flex !important;
+                flex-direction: column !important;
+                flex-wrap: wrap !important;
+                /* Ensure wrapping if row persists */
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                gap: 1rem;
+                padding-bottom: 0;
+            }
+
+            .info-card-grid {
+                width: 100% !important;
+                /* Force full width */
+                flex: 0 0 auto !important;
+                /* Don't shrink */
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust Icon Strip for Mobile Width */
+            .info-icon-strip {
+                width: 80px;
+                /* Reduced to ensure more space for text */
+            }
+
+            .local-icon-sm {
+                width: 50px;
+                /* Reduced slightly */
+                height: 50px;
             }
 
             .project-grid-area {
                 grid-template-columns: 1fr;
+                padding-bottom: 0;
             }
         }
 
@@ -706,6 +786,38 @@
                 overflow-x: auto;
                 /* Native scroll on mobile */
                 scroll-snap-type: x mandatory;
+            }
+        }
+
+        /* Mobile Phone Carousel & Aux Sizing */
+        @media (max-width: 768px) {
+
+            /* Vertical Stack for Carousel Projects (Consistency with Cloud) */
+            .carousel-track-container {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: visible;
+                /* Allow vertical flow */
+            }
+
+            .carousel-track {
+                flex-direction: column;
+                transform: none !important;
+                /* Disable JS positioning */
+                gap: 1rem;
+                padding-bottom: 0;
+            }
+
+            .carousel-track .project-card {
+                width: 100% !important;
+                /* Full width stack */
+                flex: 0 0 auto !important;
+            }
+
+            /* Hide Dots on Mobile */
+            .carousel-dots {
+                display: none;
             }
         }
 
