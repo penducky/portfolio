@@ -519,8 +519,8 @@
         }
 
         .tech-icon {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
             opacity: 0.7;
             transition: opacity 0.3s;

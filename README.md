@@ -11,7 +11,7 @@ A globally distributed, **serverless** portfolio engineered on AWS (S3 & CloudFr
 <img src=".github/assets/cloud-mode.png" alt="Portfolio Website" width="700">
 </div>
 
-### 🔗 [View Live Site](https://dox0mjppevydi.cloudfront.net)
+### 🔗 [View Live Site](penducky.click)
 
 ---
 
@@ -44,7 +44,11 @@ We utilize Amazon S3 for serverless static asset storage.
 We utilize Amazon CloudFront as a CDN to accelerate global delivery and enforce security.
 * **Reason:** CloudFront caches content at edge locations to minimize latency to the user. We chose this over **S3 Static Website Hosting**, which lacks HTTPS support and requires public bucket access, and over **AWS Amplify**, which abstracts away the infrastructure. This approach allows for granular control over security policies and demonstrates a deeper understanding of cloud distribution fundamentals.
 
-### 3. <img src="/assets/img/icons/github-actions.svg" width="25"> Automation: GitHub Actions
+### 3. <img src="/assets/img/icons/aws-route53.svg" width="25"> DNS & Routing: Amazon Route53
+We utilize Amazon Route53 for authoritative DNS resolution and domain management.
+* **Reason:** Route53 enables the use of **Alias Records** to map the root domain directly to the CloudFront distribution. Crucially, it integrates with **AWS Certificate Manager (ACM)** to automate DNS-based certificate validation, ensuring strict HTTPS enforcement.
+
+### 4. <img src="/assets/img/icons/github-actions.svg" width="25"> Automation: GitHub Actions
 We utilize GitHub Actions for a strictly automated CI/CD pipeline.
 * **Reason:** Automation ensures consistency and eliminates human error during deployments. It keeps the site updated by syncing files from GitHub to S3 and invalidating the CloudFront cache in a single workflow, preventing the delivery of mixed content versions often seen with manual uploads.
 
@@ -52,7 +56,7 @@ We utilize GitHub Actions for a strictly automated CI/CD pipeline.
 
 ## 🛠️ Tech Stack & Tools
 
-* **Cloud Provider:** AWS (S3, CloudFront)
+* **Cloud Provider:** AWS (S3, CloudFront, Route53, Certificate Manager)
 * **CI/CD:** GitHub Actions (YAML workflows)
 * **Frontend:** HTML5 (AI-Assisted via Google Gemini and Antigravity)
 
@@ -60,14 +64,9 @@ We utilize GitHub Actions for a strictly automated CI/CD pipeline.
 
 ## 🚀 Future Improvements
 
-A conscious decision was made to exclude the following paid services to prioritize a cost-efficient learning environment. With an allocated budget, these services would be beneficial for security and branding.
+A conscious decision was made to exclude the following paid services to prioritize a cost-efficient learning environment. With an allocated budget, these services would be beneficial for security.
 
-- [ ] **Custom Domain (Route53):**
-    Migrate from the default `cloudfront.net` URL to a custom domain (e.g., `penducky.com`) using **Amazon Route53**. This will improve personal branding and allow for more flexible DNS routing policies.
-
-- [ ] **Enhance Security (ACM & WAF):**
-    * **SSL/TLS Termination:** Provision a public certificate via **AWS Certificate Manager (ACM)** to enforce strict HTTPS encryption on the custom domain.
-    * **Edge Security:** Deploy **AWS Web Application Firewall (WAF)** attached to the CloudFront distribution to inspect incoming traffic and block common web exploits and malicious bot traffic.
+- [ ] **Enhance Security (WAF):** Deploy **AWS Web Application Firewall (WAF)** attached to the CloudFront distribution to inspect incoming traffic and block common web exploits and malicious bot traffic.
 
 ## 📂 Project Structure
 

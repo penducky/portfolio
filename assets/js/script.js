@@ -13,24 +13,28 @@ const data = {
             {
                 title: 'Serverless Portfolio',
                 date: 'Dec 2025',
-                desc: 'Static web hosted in Amazon Web Services.',
+                desc: 'Cloud-native portfolio hosted on Amazon Web Services (AWS) with fully automated GitHub Actions pipelines.',
                 description: `
                     <p>Serverless portfolio website leveraging modern cloud infrastructure and AI-assisted development.</p>
                     <ul>
-                        <li><b>Cloud Architecture:</b> Deployed a high-availability static site on Amazon S3, utilizing CloudFront CDN for global caching and HTTPS security.</li>
+                        <li><b>Cloud Infrastructure:</b> Architected a serverless hosting solution using Amazon S3 for storage and CloudFront CDN to minimize global latency.</li>
+                        <li><b>Network & Security:</b> Configured Amazon Route53 for authoritative DNS routing and provisioned ACM certificates to ensure end-to-end HTTPS encryption.</li>
                         <li><b>CI/CD Automation:</b> Engineered a GitHub Actions pipeline to automatically build and sync code changes to AWS upon repository push.</li>
                         <li><b>Development:</b> Leveraged AI-assisted tooling to accelerate HTML5 frontend prototyping and optimization.</li>
                     </ul>
                 `,
-                image: 'assets/img/projects/serverless-api.jpg',
+                image: 'assets/img/projects/serverless-portfolio.png',
                 tech: [
-                    { name: 'AWS S3', icon: 'assets/img/icons/aws-s3.svg' },
-                    { name: 'CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' },
+                    { name: 'Amazon S3', icon: 'assets/img/icons/aws-s3.svg' },
+                    { name: 'Amazon CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' },
+                    { name: 'Amazon Route53', icon: 'assets/img/icons/aws-route53.svg' },
+                    { name: 'Amazon Certificate Manager', icon: 'assets/img/icons/aws-acm.svg' },
                     { name: 'Gemini', icon: 'assets/img/icons/gemini.svg' },
                     { name: 'GitHub', icon: 'assets/img/icons/github.svg' },
                     { name: 'HTML5', icon: 'assets/img/icons/html.svg' }
                 ],
-                link: '#'
+                link: 'https://penducky.click/',
+                github: 'https://github.com/penducky/portfolio'
             },
             {
                 title: 'Premium Vault Content',
@@ -44,8 +48,8 @@ const data = {
                 `,
                 image: 'assets/img/projects/k8s-cluster.jpg',
                 tech: [
-                    { name: 'AWS S3', icon: 'assets/img/icons/aws-s3.svg' },
-                    { name: 'CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' }
+                    { name: 'Amazon S3', icon: 'assets/img/icons/aws-s3.svg' },
+                    { name: 'Amazon CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' }
                 ],
                 link: '#'
             },
@@ -76,7 +80,7 @@ const data = {
         auxTitle: 'Core Competencies',
         auxIcon: 'ri-clapperboard-line',
         items: [
-            { name: "Narrative Storytelling", detail: "Expertise", icon: "assets/img/icons/film.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Storytelling+Portfolio" },
+            { name: "Visual Effects", detail: "Expertise", icon: "assets/img/icons/film.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Storytelling+Portfolio" },
             { name: "Sound Design", detail: "Pro Tools / Audition", icon: "assets/img/icons/sound.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Sound+Design+Reel" },
             { name: "Color Grading", detail: "DaVinci Resolve", icon: "assets/img/icons/color.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Color+Grading+Work" }
         ],
@@ -505,9 +509,16 @@ function openProjectModal(index) {
                 <span>${project.date}</span>
             </div>
             <div class="modal-desc-rich">${project.description}</div>
-            <a href="${project.link}" target="_blank" class="modal-action-btn">
-                View Project <i class="ri-arrow-right-up-line"></i>
-            </a>
+            <div class="modal-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="${project.link}" target="_blank" class="modal-action-btn">
+                    View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+                ${project.github ? `
+                <a href="${project.github}" target="_blank" class="modal-action-btn backend-btn" style="background-color: #333;">
+                    <i class="ri-github-fill" style="font-size: 1.4rem;"></i> Repository <i class="ri-arrow-right-up-line"></i>
+                </a>
+                ` : ''}
+            </div>
         </div>
     `;
 
