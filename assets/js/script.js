@@ -6,8 +6,24 @@ const data = {
         auxTitle: 'Certifications',
         auxIcon: 'ri-shield-check-line',
         items: [
-            { name: "AWS Solutions Architect", detail: "Associate", date: "On progress", icon: "assets/img/icons/aws-saa-c03.png", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=AWS+Certificate" },
-            { name: "CS50 Python", detail: "Harvard University", date: "On progress", icon: "assets/img/icons/harvard-university.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=CS50+Certificate" }
+            {
+                name: "AWS Solutions Architect",
+                detail: "Associate",
+                date: "Issued Jan 2026",
+                icon: "assets/img/icons/aws-saa-c03.png",
+                image: "assets/img/certs/aws-saa-c03-certificate.png",
+                link: "https://www.credly.com/badges/ce2d61e3-48bf-4b69-89c6-d28f216f2d94",
+                skills: ["AWS", "Amazon Web Services", "Cloud Architecture", "Cloud Infrastructure", "Cloud Services"]
+            },
+            {
+                name: "CS50 Python",
+                detail: "Harvard University",
+                date: "Issued Jan 2026",
+                icon: "assets/img/icons/harvard-university.svg",
+                image: "assets/img/certs/cs50-python-certificate.png",
+                link: "https://cs50.harvard.edu/certificates/e896cd1a-c8fc-4719-adf3-83498b99b1f6",
+                skills: ["Python 3", "Object-Oriented Programming", "Algorithms", "Testing (pytest)", "Regular Expressions", "File I/O"]
+            }
         ],
         projects: [
             {
@@ -80,9 +96,27 @@ const data = {
         auxTitle: 'Core Competencies',
         auxIcon: 'ri-clapperboard-line',
         items: [
-            { name: "Visual Effects", detail: "Expertise", icon: "assets/img/icons/film.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Storytelling+Portfolio" },
-            { name: "Sound Design", detail: "Pro Tools / Audition", icon: "assets/img/icons/sound.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Sound+Design+Reel" },
-            { name: "Color Grading", detail: "DaVinci Resolve", icon: "assets/img/icons/color.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Color+Grading+Work" }
+            {
+                name: "Visual Effects",
+                detail: "Expertise",
+                icon: "assets/img/icons/film.svg",
+                certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Visual+Effects+Portfolio",
+                skills: ["Rotoscoping", "Compositing", "Green Screen Keying", "Particle Effects", "3D Tracking", "Adobe After Effects"]
+            },
+            {
+                name: "Sound Design",
+                detail: "Pro Tools / Audition",
+                icon: "assets/img/icons/sound.svg",
+                certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Sound+Design+Reel",
+                skills: ["Audio Mixing", "Foley Recording", "Dialogue Editing", "Spatial Audio", "Noise Reduction", "Adobe Audition"]
+            },
+            {
+                name: "Color Grading",
+                detail: "DaVinci Resolve",
+                icon: "assets/img/icons/color.svg",
+                certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Color+Grading+Work",
+                skills: ["Color Correction", "Look Development", "HDR Grading", "Shot Matching", "Skin Tone Perfection", "DaVinci Resolve"]
+            }
         ],
         projects: [
             {
@@ -166,8 +200,24 @@ const data = {
         auxTitle: 'Education',
         auxIcon: 'ri-graduation-cap-line',
         items: [
-            { name: "Bachelor of Architecture", detail: "Bandung Institute of Technology", date: "Sep 2025", icon: "assets/img/icons/itb.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=Architecture+Degree" },
-            { name: "Sustainable Project Management", detail: "Revit & ArchiCAD", date: "Certified 2024", icon: "assets/img/icons/bim.svg", certImage: "https://placehold.co/600x400/1a1a1a/FFF?text=BIM+Certificate" }
+            {
+                name: "Bachelor of Architecture",
+                detail: "Bandung Institute of Technology",
+                date: "Jul 2025",
+                icon: "assets/img/icons/itb.svg",
+                image: "assets/img/certs/Ijazah-Digital-15221044.png",
+                link: "assets/img/certs/Ijazah-Digital-15221044.png",
+                skills: ["Architectural Design", "Urban Planning", "Structural Systems", "History of Architecture", "Building Physics", "Design Studio"]
+            },
+            {
+                name: "Sustainable Project Management",
+                detail: "Revit & ArchiCAD",
+                date: "Certified 2024",
+                icon: "assets/img/icons/bim.svg",
+                image: "assets/img/certs/Ijazah-Digital-15221044.png",
+                link: "#",
+                skills: ["BIM Modeling", "Energy Analysis", "Construction Documentation", "Project Scheduling", "Sustainable Materials", "Autodesk Revit"]
+            }
         ],
         projects: [
             {
@@ -479,6 +529,31 @@ function openCertModal(index) {
     const item = data[currentActiveRole].items[index];
     const modalBody = document.getElementById('modalBody');
 
+    // Use specific image if available, otherwise check if certImage (legacy/fallback) is an image, else use icon
+    // Note: We updated the data structure to have 'image' and 'link'.
+    // For other roles (Video, Arch) they might still rely on 'certImage' as both image and link?
+    // Let's inspect other roles. They use 'certImage' which are placeholder images.
+    // To maintain compatibility, we treat 'certImage' as the link AND image if 'image' property is missing.
+
+    let displayImage = item.image;
+    let linkUrl = item.link;
+
+    if (!displayImage) {
+        // Fallback for other roles or legacy structure
+        // If certImage exists, assume it's the image.
+        if (item.certImage) {
+            displayImage = item.certImage;
+            linkUrl = item.certImage; // If it's just an image, linking to itself is fine
+        } else {
+            displayImage = item.icon; // Final fallback
+        }
+    }
+
+    // Ensure we have a link
+    if (!linkUrl) linkUrl = "#";
+
+    const imageClass = "modal-img"; // Always display as full image now that we have generated placeholders
+
     modalBody.innerHTML = `
         <div class="modal-body-content">
             <h2 class="modal-title">${item.name}</h2>
@@ -486,11 +561,15 @@ function openCertModal(index) {
                 ${item.date ? `<span>${item.date}</span>` : ''}
                 <span>${item.detail}</span>
             </div>
-            <img src="${item.certImage}" class="modal-img" alt="${item.name}">
-            <p class="modal-desc">
-                Detailed information about this certification or achievement would go here. 
-                This demonstrates proficiency in the subject matter.
-            </p>
+            
+            <a href="${linkUrl}" target="_blank" class="cert-link-wrapper" title="Click to view official certificate">
+                <img src="${displayImage}" class="${imageClass}" alt="${item.name}">
+                <div class="click-hint"><i class="ri-external-link-line"></i> Click to View Certificate</div>
+            </a>
+
+            <div class="skills-container">
+                ${item.skills ? item.skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('') : ''}
+            </div>
         </div>
     `;
 
