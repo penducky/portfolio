@@ -66,7 +66,7 @@ const data = {
                         <li><b>CI/CD Automation:</b> Engineered a GitHub Actions pipeline to automatically check the pushed code by creating 'terraform plan' and another pipeline to apply or destroy the plan directly from GitHub Actions using workflow dispatch</li>
                     </ul>
                 `,
-                image: 'assets/img/projects/wordpress-site.png',
+                image: 'assets/img/projects/wordpress-infrastructure-diagram.png',
                 tech: [
                     { name: 'Terraform', icon: 'assets/img/icons/terraform.svg' },
                     { name: 'Amazon VPC', icon: 'assets/img/icons/aws-vpc.svg' },
