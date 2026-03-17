@@ -53,21 +53,39 @@ const data = {
                 github: 'https://github.com/penducky/portfolio'
             },
             {
-                title: 'Premium Vault Content',
-                date: 'Dec 2025',
-                desc: 'Premium content that can only be accessible by premium users.',
+                title: 'Terraform WordPress Infrastructure',
+                date: 'Mar 2026',
+                desc: 'A fully provisioned, highly available WordPress architecture engineered on AWS using Terraform for Infrastructure as Code (IaC).',
                 description: `
-                    <p>~</p>
+                    <p>Cloud Infrastructure defined in Terraform to provision fully-functioning WordPress site hosted in AWS.</p>
                     <ul>
-                        <li>Content</li>
+                        <li><b>Infrastructure-as-Code:</b> Written in HashiCorp Configuration Language (HCL) inside Terraform.</li>
+                        <li><b>State Locking:</b> The state key is kept in S3 bucket with state locking enabled to prevent others from acquiring the lock.</li>
+                        <li><b>Compute Service:</b> Deployed in EC2 because WordPress requires PHP runtime environment.</li>
+                        <li><b>Scalable & Highly-Available:</b> Resources are planned to deploy in Multi-AZ configuration, while using ASG to scale up or down the instances based on traffic and ALB to distribute the traffic.</li>
+                        <li><b>CI/CD Automation:</b> Engineered a GitHub Actions pipeline to automatically check the pushed code by creating 'terraform plan' and another pipeline to apply or destroy the plan directly from GitHub Actions using workflow dispatch</li>
                     </ul>
                 `,
-                image: 'assets/img/projects/k8s-cluster.jpg',
+                image: 'assets/img/projects/wordpress-site.png',
                 tech: [
+                    { name: 'Terraform', icon: 'assets/img/icons/terraform.svg' },
+                    { name: 'Amazon VPC', icon: 'assets/img/icons/aws-vpc.svg' },
+                    { name: 'Amazon EC2', icon: 'assets/img/icons/aws-ec2.svg' },
+                    { name: 'Amazon NAT Gateway', icon: 'assets/img/icons/aws-natgateway.svg' },
+                    { name: 'Amazon RDS', icon: 'assets/img/icons/aws-rds.svg' },
+                    { name: 'Amazon ASG', icon: 'assets/img/icons/aws-asg.svg' },
+                    { name: 'Amazon ALB', icon: 'assets/img/icons/aws-alb.svg' },
+                    { name: 'Amazon Route53', icon: 'assets/img/icons/aws-route53.svg' },
                     { name: 'Amazon S3', icon: 'assets/img/icons/aws-s3.svg' },
-                    { name: 'Amazon CloudFront', icon: 'assets/img/icons/aws-cloudfront.svg' }
+                    { name: 'GitHub', icon: 'assets/img/icons/github.svg' },
+                    { name: 'GitHub Actions', icon: 'assets/img/icons/github-actions.svg' },
+                    { name: 'MySQL', icon: 'assets/img/icons/mysql.svg' },
+                    { name: 'Linux', icon: 'assets/img/icons/linux.svg' },
+                    { name: 'bash', icon: 'assets/img/icons/bash.svg' }
+
                 ],
-                link: '#'
+                link: 'http://wordpress.penducky.click/wordpress',
+                github: 'https://github.com/penducky/terraform-wordpress'
             },
             {
                 title: 'Coming Soon',
