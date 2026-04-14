@@ -7,13 +7,22 @@ const data = {
         auxIcon: 'ri-shield-check-line',
         items: [
             {
-                name: "AWS Solutions Architect",
-                detail: "Associate",
+                name: "Solutions Architect - Associate",
+                detail: "Amazon Web Services (AWS)",
                 date: "Issued Jan 2026",
                 icon: "assets/img/icons/aws-saa-c03.png",
                 image: "assets/img/certs/aws-saa-c03-certificate.png",
                 link: "https://www.credly.com/badges/ce2d61e3-48bf-4b69-89c6-d28f216f2d94",
                 skills: ["AWS", "Amazon Web Services", "Cloud Architecture", "Cloud Infrastructure", "Cloud Services"]
+            },
+            {
+                name: "Cisco Certified Network Associate",
+                detail: "Cisco",
+                date: "Planned for Apr 2026",
+                icon: "assets/img/icons/ccna.png",
+                image: "assets/img/certs/ccna-certificate.png",
+                link: "https://www.credly.com/",
+                skills: ["Networking", "Cisco", "CCNA", "Routing", "Switching", "Network Security"]
             },
             {
                 name: "CS50 Python",
@@ -53,9 +62,9 @@ const data = {
                 github: 'https://github.com/penducky/portfolio'
             },
             {
-                title: 'Terraform WordPress Infrastructure',
+                title: 'Three-Tier WordPress Infrastructure',
                 date: 'Mar 2026',
-                desc: 'A fully provisioned, highly available WordPress architecture engineered on AWS using Terraform for Infrastructure as Code (IaC).',
+                desc: 'A fully provisioned, highly available WordPress architecture engineered on AWS using Terraform.',
                 description: `
                     <p>Cloud Infrastructure defined in Terraform to provision fully-functioning WordPress site hosted in AWS.</p>
                     <ul>
@@ -88,9 +97,9 @@ const data = {
                 github: 'https://github.com/penducky/terraform-wordpress'
             },
             {
-                title: 'Coming Soon',
+                title: 'Event-Driven Containerized Order Fulfillment Workflow',
                 date: 'Coming Soon',
-                desc: 'Coming Soon',
+                desc: 'An event-driven, containerized order fulfillment workflow that demonstrates the principles of microservices architecture and asynchronous processing.',
                 description: `
                     <p>Coming Soon</p>
                     <ul>
@@ -101,7 +110,20 @@ const data = {
                 `,
                 image: 'assets/img/projects/coming-soon.jpg',
                 tech: [
-
+                    { name: 'Terraform', icon: 'assets/img/icons/terraform.svg' },
+                    { name: 'Docker', icon: 'assets/img/icons/docker.svg' },
+                    { name: 'Amazon VPC', icon: 'assets/img/icons/aws-vpc.svg' },
+                    { name: 'Amazon DynamoDB', icon: 'assets/img/icons/aws-dynamodb.svg' },
+                    { name: 'Amazon ECS', icon: 'assets/img/icons/aws-ecs.svg' },
+                    { name: 'Amazon SQS', icon: 'assets/img/icons/aws-sqs.svg' },
+                    { name: 'Amazon EventBridge', icon: 'assets/img/icons/aws-eventbridge.svg' },
+                    { name: 'Amazon Route53', icon: 'assets/img/icons/aws-route53.svg' },
+                    { name: 'Amazon Certificate Manager', icon: 'assets/img/icons/aws-acm.svg' },
+                    { name: 'GitHub', icon: 'assets/img/icons/github.svg' },
+                    { name: 'GitHub Actions', icon: 'assets/img/icons/github-actions.svg' },
+                    { name: 'MySQL', icon: 'assets/img/icons/mysql.svg' },
+                    { name: 'Linux', icon: 'assets/img/icons/linux.svg' },
+                    { name: 'bash', icon: 'assets/img/icons/bash.svg' }
                 ],
                 link: '#'
             }
@@ -139,7 +161,7 @@ const data = {
         projects: [
             {
                 title: 'Homestay Documentary',
-                date: 'Dec 2025',
+                date: 'Coming Soon',
                 desc: 'Documentary-style film with focus on homestay experience.',
                 description: `
                     <p>An immersive documentary exploring the cultural nuances and human connections formed through homestay living. The film captures authentic moments of hospitality and exchange.</p>
@@ -437,9 +459,24 @@ function createCardHtml(p, index, isCarousel) {
     // Ensure height: 100% to fill the flex stretch
     const carouselStyle = isCarousel ? 'style="width: calc((100% - 2.5rem) / 3); flex-shrink: 0;"' : '';
 
+    let mediaHtml = `<div class="project-thumb" style="background-image: url('${p.image}')"></div>`;
+
+    let youtubeId = null;
+    if (currentActiveRole === 'video' && p.link && p.link.match(/youtube\.com\/watch\?v=([^#&?]*)/)) {
+        youtubeId = p.link.match(/youtube\.com\/watch\?v=([^#&?]*)/)[1];
+    }
+
+    if (youtubeId) {
+        mediaHtml = `
+            <div class="project-thumb" style="position: relative; overflow: hidden; background: #000;">
+                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
+    }
+
     return `
         <div class="card project-card" ${carouselStyle} onclick="openProjectModal(${index})">
-            <div class="project-thumb" style="background-image: url('${p.image}')"></div>
+            ${mediaHtml}
             <div class="project-content">
                 <div class="project-top">
                     <h3 class="project-title">${p.title}</h3>
@@ -598,8 +635,23 @@ function openProjectModal(index) {
     const project = data[currentActiveRole].projects[index];
     const modalBody = document.getElementById('modalBody');
 
+    let youtubeId = null;
+    if (currentActiveRole === 'video' && project.link && project.link.match(/youtube\.com\/watch\?v=([^#&?]*)/)) {
+        youtubeId = project.link.match(/youtube\.com\/watch\?v=([^#&?]*)/)[1];
+    }
+
+    let mediaContent = `<img src="${project.image}" class="modal-img" alt="${project.title}">`;
+
+    if (youtubeId) {
+        mediaContent = `
+            <div class="modal-video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
+    }
+
     modalBody.innerHTML = `
-        <img src="${project.image}" class="modal-img" alt="${project.title}">
+        ${mediaContent}
         <div class="modal-body-content">
             <h2 class="modal-title">${project.title}</h2>
             <div class="modal-meta">

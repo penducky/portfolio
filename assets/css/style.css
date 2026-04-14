@@ -915,6 +915,28 @@
             display: block;
         }
 
+        .modal-video-container {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--border);
+            display: block;
+        }
+
+        .modal-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
