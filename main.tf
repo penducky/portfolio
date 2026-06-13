@@ -62,7 +62,7 @@ resource "aws_s3_bucket_policy" "main" {
 ## ACM CERTIFICATE FOR CLOUDFRONT ##
 resource "aws_acm_certificate" "cert" {
   domain_name       = local.domain_name
-  subject_alternative_names = ["www.${local.domain_name}"]
+  subject_alternative_names = ["*.${local.domain_name}"]
   validation_method = "DNS"
 
   tags = {
@@ -108,7 +108,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   default_root_object = "index.html"
 
-  # aliases = [data.aws_route53_zone.penducky.name]
+  aliases = ["www.${local.domain_name}"]
 
   default_cache_behavior {
     cache_policy_id   = "658327ea-f89d-4fab-a63d-7e88639e58f6" # CachingOptimized
